@@ -1,0 +1,45 @@
+<div>
+  <h2>KRC20 Tokens</h2>
+  <div
+    class="tokens-container"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="50"
+    [scrollWindow]="false"
+  >
+  @if (tokensQuery.isPending()) {
+    Loading...
+  } @else if (tokensQuery.isError()) {
+    Error: {{ tokensQuery.error().message }}
+  } @else if (tokensQuery.isSuccess()) {
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Ticker</th>
+          <th>Market Cap</th>
+          <th>Price</th>
+          <th>Volume</th>
+          <th>Minted</th>
+          <th>Holders</th>
+          <th>Age</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (token of tokensQuery.data(); track token._id) {
+          <tr>
+            <td># {{ token.rank }}</td>
+            <td>{{ token.ticker }}</td>
+            <td>{{ formatNumber(token.marketCap) }}</td>
+            <td>{{ formatNumber(token.price) }} KAS</td>
+            <td>{{ formatCurrency(token.volumeUsd ?? 0) }}</td>
+            <td>{{ formatPercent(token.totalMinted, token.totalSupply) }}</td>
+            <td>{{ formatNumber(token.totalHolders) }}</td>
+            <td>{{ formatTimeAgo(token.creationDate) }}</td>
+          </tr>
+      }
+    </tbody>
+    </table>
+  }
+  </div>
+</div>

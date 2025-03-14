@@ -1,0 +1,13 @@
+{
+    "/api": {
+        "target": "https://dev-api.kaspa.com",
+        "secure": true,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api": ""
+        },
+        "headers": {
+            "Origin": "https://dev.kaspa.com"
+        }
+    }
+}

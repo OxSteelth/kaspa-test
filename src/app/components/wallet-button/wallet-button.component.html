@@ -1,0 +1,22 @@
+<ng-container *ngIf="!kaswareInstalled; else installed">
+    <a href="https://kasware.xyz" target="_blank">
+        Install Kasware Wallet
+    </a>
+</ng-container>
+
+<ng-template #installed>
+    <ng-container *ngIf="connected; else notConnected">
+        <button (click)="disconnect()">
+            Disconnect Kasware Wallet
+        </button>
+        <div style="text-align: left; margin-top: 10px;">
+            <span style="font-weight: bold;">Balance:</span>
+            {{ formatNumber(balance.total / 100000000) }}
+        </div>
+    </ng-container>
+    <ng-template #notConnected>
+        <button (click)="connect()">
+            Connect Kasware Wallet
+        </button>
+    </ng-template>
+</ng-template>

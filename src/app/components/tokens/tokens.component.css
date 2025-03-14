@@ -1,0 +1,9 @@
+th, td {
+    text-align: left;
+    padding: 0.5rem;
+}
+
+.tokens-container {
+    height: 80vh;
+    overflow-y: auto;
+}
